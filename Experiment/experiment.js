@@ -101,7 +101,7 @@ function handleZDistance(newValue) {
 }
 
 function handleXDistance(newValue) {
-    teapot.position.x=newValue;
+    teapot.position.x=newValue+2.33;
     verticalMirror.render();
     PIErender();
 }
@@ -116,7 +116,9 @@ function initialiseControls() {
     /* Create Input Panel */
     // PIEaddDisplaySlider("Distance from Mirror", 1.5, 0.82, 2.14, 0.01);
     PIEaddInputSlider("Distance from Mirror", 1.5, handleZDistance, 0.82, 2.14, 0.01);
+    PIEaddInputSlider("X", 0.7, handleXDistance, 0, 1.4, 0.01);
     PIEaddDisplaySlider("Distance from Mirror", 1.5, handleZDistance, 0.82, 2.14, 0.01);
+    PIEaddDisplaySlider("X", 0.7, handleXDistance, 0, 1.4, 0.01);
     // PIEaddInputSlider("Mass", 4, handleArrowMass, 4, 20, 1);
     /* Create Display Panel */
 }
@@ -216,11 +218,11 @@ function loadExperimentElements()
 var material;
 var loader;
 var texture;
-    PIEsetExperimentTitle("9.11.8D Potential energy - elasticity");
+    PIEsetExperimentTitle("7.15.2A Position of the image");
     PIEsetDeveloperName("Navneet Nandan");
     PIEhideControlElement();
     loader = new THREE.ObjectLoader();
-    loadScript("Mirror.js",callbackMirrorLoad);
+    loadScript("https://threejs.org/examples/js/Mirror.js",callbackMirrorLoad);
 
     /* initialise help and info content */
     initialiseHelp();
@@ -231,7 +233,7 @@ var texture;
 
     /* initialise Other Variables */
     initialiseOtherVariables();
-    loader.load('chessboard.json',function (obj) {
+    loader.load('https://raw.githubusercontent.com/NavneetNandan/MirrorActivity/master/Experiment/chessboard.json',function (obj) {
         chessboard=obj;
         chessboard.scale.x=15;
         chessboard.scale.z=15;
@@ -239,7 +241,7 @@ var texture;
         chessboard.position.set(3,1,0);
         PIEaddElement(chessboard);
     });
-    loader.load('table-0001.json',function (obj) {
+    loader.load('https://raw.githubusercontent.com/NavneetNandan/MirrorActivity/master/Experiment/table-0001.json',function (obj) {
         table=obj;
         table.position.set(3,-0.18,0)
         table.scale.x=0.7;
@@ -247,7 +249,7 @@ var texture;
         table.scale.z=0.7;
         PIEaddElement(table)
     });
-    loader.load("teapot-claraio.json", function (obj) {
+    loader.load("https://raw.githubusercontent.com/NavneetNandan/MirrorActivity/master/Experiment/teapot-claraio.json", function (obj) {
         teapot = obj;
         teapotX=3;
         teapotY=1;
