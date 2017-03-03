@@ -101,7 +101,7 @@ function handleZDistance(newValue) {
 }
 
 function handleXDistance(newValue) {
-    teapot.position.x=newValue+2.33;
+    teapot.position.x=newValue+3.03;
     verticalMirror.render();
     PIErender();
 }
@@ -116,9 +116,9 @@ function initialiseControls() {
     /* Create Input Panel */
     // PIEaddDisplaySlider("Distance from Mirror", 1.5, 0.82, 2.14, 0.01);
     PIEaddInputSlider("Distance from Mirror", 1.5, handleZDistance, 0.82, 2.14, 0.01);
-    PIEaddInputSlider("X", 0.7, handleXDistance, 0, 1.4, 0.01);
+    PIEaddInputSlider("Left - Right", 0, handleXDistance, -0.7, 0.7, 0.01);
     PIEaddDisplaySlider("Distance from Mirror", 1.5, handleZDistance, 0.82, 2.14, 0.01);
-    PIEaddDisplaySlider("X", 0.7, handleXDistance, 0, 1.4, 0.01);
+    PIEaddDisplaySlider("Left - Right", 0, handleXDistance, -0.7, 0.7, 0.01);
     // PIEaddInputSlider("Mass", 4, handleArrowMass, 4, 20, 1);
     /* Create Display Panel */
 }
@@ -196,14 +196,19 @@ function loadScript(url, callback)
     head.appendChild(script);
 }
 var planeGeo ;
-
+var frame;
 function callbackMirrorLoad() {
     verticalMirror = new THREE.Mirror( PIErenderer, PIEcamera, { clipBias: 0.003, textureWidth: WIDTH, textureHeight: HEIGHT, color:0x889999 } );
-    var verticalMirrorMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 3, 2 ), verticalMirror.material );
+    var verticalMirrorMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 2, 1.5 ), verticalMirror.material );
     verticalMirrorMesh.add( verticalMirror );
-    verticalMirrorMesh.position.y = 1.5;
+    verticalMirrorMesh.position.y = 1.8;
     verticalMirrorMesh.position.x = 3;
     verticalMirrorMesh.position.z = -1.5;
+    var geometry = new THREE.BoxGeometry( 2.2, 1.7, 0.001);
+    var material = new THREE.MeshLambertMaterial( {color: 0x4E342E} );
+    frame  = new THREE.Mesh( geometry, material );
+    frame.position.set(3,1.8,-1.6);
+    PIEaddElement(frame);
     PIEscene.add( verticalMirrorMesh );
     distance_from_mirror=1.5;
     console.log(distance_from_mirror);
@@ -218,7 +223,7 @@ function loadExperimentElements()
 var material;
 var loader;
 var texture;
-    PIEsetExperimentTitle("7.15.2A Position of the image");
+    PIEsetExperimentTitle("Position of the image");
     PIEsetDeveloperName("Navneet Nandan");
     PIEhideControlElement();
     loader = new THREE.ObjectLoader();
@@ -331,8 +336,8 @@ var texture;
     myBack.receiveShadow = true;
     // PIEaddElement(myBack);
     /* Instantiate experiment controls */
-    var planeBack = new THREE.Mesh( planeGeo, new THREE.MeshPhongMaterial( { color: 0xdedede } ) );
-    planeBack.position.z = -10;
+    var planeBack = new THREE.Mesh( planeGeo, new THREE.MeshPhongMaterial( { color: 0x4CAF50 } ) );
+    planeBack.position.z = -2;
     planeBack.position.y = 0;
     PIEscene.add( planeBack );
 
